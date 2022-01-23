@@ -405,12 +405,12 @@
 </head>
 
 <body class="antialiased">
-    sofvgkseogksd
-    
-
-
-
-</body>
+        Jewelry Shop
+        <br><div class="center">
+        <a href = "/login">Login</a><br>
+        <a href = "/register">Register</a>
+        </div>
+    </body>
 
 
 </html>
