@@ -16,4 +16,7 @@ class Products extends Model
         'price',
         'image',
     ];
+    public function owner(){
+        return $this->belongsTo(\App\Models\User::class);
+    }
 }
