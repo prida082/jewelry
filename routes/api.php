@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //api Authen
-Route::post('/login',[\App\Http\Controllers\AuthController::class,'login']);
-Route::post('/register',[\App\Http\Controllers\AuthController::class,'register']);
+Route::post('/login',[AuthController::class,'login']);
+Route::post('/register',[AuthController::class,'register']);
 
 //public
-Route::get('/product',[\App\Http\Controllers\ProductController::class,'index']);
-Route::get('/product/show/{id}',[\App\Http\Controllers\ProductController::class,'show']);
-Route::get('/product/search/{name}',[\App\Http\Controllers\ProductController::class,'search']);
+Route::get('/product',[\ProductController::class,'index']);
+Route::get('/product/show/{id}',[ProductController::class,'show']);
+Route::get('/product/search/{name}',[ProductController::class,'search']);
 
 //protect
 
