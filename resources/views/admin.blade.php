@@ -2,6 +2,6 @@
 
 @section('content')
 
-<index-component />
+<admin-component />
 
 @endsection

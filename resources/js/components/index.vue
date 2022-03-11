@@ -1,93 +1,64 @@
 <template>
-    <v-app>
-        <v-carousel>
-            <v-carousel-item
-            v-for="(item,i) in items"
-            :key="i"
-            :src="item.src"
-            reverse-transition="fade-transition"
-            transition="fade-transition"
-            ></v-carousel-item>
-        </v-carousel>
-
-        <v-container fluid>
-        <v-row dense>
-            <v-col
-            v-for="product in products"
-            :key="product.id"
-            :cols="3"
-            >
-            <v-card>
-                <v-img
-
-                class="white--text align-end"
-                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                height="200px"
-                >
-                <v-card-title v-text="product.name"></v-card-title>
-                </v-img>
-
-                <v-card-actions>
-                <v-spacer></v-spacer>
-
-                <v-btn icon>
-                    <v-icon>mdi-account</v-icon>
-                </v-btn>
-
-                <v-btn icon>
-                    <v-icon>mdi-bookmark</v-icon>
-                </v-btn>
-
-                <v-btn icon>
-                    <v-icon>mdi-share-variant</v-icon>
-                </v-btn>
-                </v-card-actions>
-            </v-card>
-            </v-col>
-        </v-row>
-        </v-container>
-    </v-app>
+  <div class="container">
+    <div class="row justify-content-center row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+      <div class="col-12" v-for="item in jewelry" :key="item.id">
+        <div class="card-group">
+          <div class="card">
+            <img :src="item.image" class="card-img-top" style="height: 200px" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title text-truncate">{{item.name}}</h5>
+              <p class="card-text text-truncate">
+                {{item.description}}
+              </p>
+              <p class="card-text">
+                <small class="text-muted">{{item.price}} $</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                products: [],
-                product: null,
-
-                items: [
-                    {
-                        src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-                    },
-                    {
-                        src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-                    },
-                    {
-                        src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-                    },
-                    {
-                        src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-                    },
-                    ],
-            }
-        },
-        mounted() {
-            this.initialize()
-            console.log('Initialized')
-        },
-        methods:{
-            initialize(){
-                axios.get('api/product')
-                    .then(response =>{
-                        if(response.data.success == true){
-                            this.products = response.data.products
-                        }
-                    })
-                    .catch(error => {
-                        console.log("error")
-                    });
-            },
-        }
-    }
+export default {
+  data() {
+    return {
+      csrf: document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content"),
+      jewelry: [],
+      Id: "",
+      Name: "",
+      Img: "",
+      price: "",
+      description: "",
+    };
+  },
+  mounted() {
+    axios
+      .get(`/api/product`)
+      .then((data) => {
+        this.jewelry = data.data;
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+  },
+  methods: {
+    buyGame(id) {
+      axios.get(`/api/product/show/${id}`).then((data) => {
+        this.Id = data.data.id;
+        this.Name = data.data.name;
+        this.Img = data.data.image;
+        this.price = data.data.price;
+        this.description = data.data.description;
+        console.log(data);
+      });
+    },
+  },
+};
 </script>
+
+<style>
+</style>

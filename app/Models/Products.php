@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Products extends Model
 {
     use HasFactory;
+   
 
     protected $fillable = [
         'id',
@@ -16,7 +17,5 @@ class Products extends Model
         'price',
         'image',
     ];
-    public function owner(){
-        return $this->belongsTo(\App\Models\User::class);
-    }
+  
 }

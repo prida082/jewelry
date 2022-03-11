@@ -21,13 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //api Authen
-Route::post('/login',[AuthController::class,'login']);
-Route::post('/register',[AuthController::class,'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
 
 //public
-Route::get('/product',[\ProductController::class,'index']);
-Route::get('/product/show/{id}',[ProductController::class,'show']);
-Route::get('/product/search/{name}',[ProductController::class,'search']);
+Route::get('/product', [ProductController::class, 'index']);
+Route::get('/product/show/{id}', [ProductController::class, 'show']);
+Route::get('/product/search/{name}', [ProductController::class, 'search']);
 
 //protect
 
@@ -35,7 +35,7 @@ Route::get('/product/search/{name}',[ProductController::class,'search']);
 //     Route::post('/product/store',[\App\Http\Controllers\ProductController::class,'store']);
 //     Route::post('/product/update',[\App\Http\Controllers\ProductController::class,'update']);
 // });
-Route::middleware('auth:sanctum')->post('/product/store',[ProductController::class,'store']);
-Route::middleware('auth:sanctum')->post('/product/update',[ProductController::class,'update']);
-Route::middleware('auth:sanctum')->delete('/product/{id}',[ProductController::class,'delete']);
-Route::middleware('auth:sanctum')->post('/logout',[AuthController::class,'logout']);
+Route::middleware('auth:sanctum')->post('/product/store', [ProductController::class, 'store']);
+Route::middleware('auth:sanctum')->post('/product/update/{id}', [ProductController::class, 'update']);
+Route::middleware('auth:sanctum')->delete('/product/del/{id}', [ProductController::class, 'destroy']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);

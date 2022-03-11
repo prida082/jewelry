@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
+use App\Http\Controllers\OrderController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,9 +18,9 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', function () {
-    if(Auth::check()){
+    if (Auth::check()) {
         return redirect('/home');
-    }else{
+    } else {
         return view('index');
     }
 });
@@ -27,6 +30,15 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/product', function(){
+Route::get('/admin', [HomeController::class, 'admin_login'])->name('admin');
+
+Route::get('/create', [HomeController::class, 'create_product'])->name('create');
+
+//Basket 
+Route::resource('baskets', OrderController::class);
+
+Route::post('/baskets',  'App\Http\Controllers\OrderController@store')->name('Basket');
+
+Route::get('/product', function () {
     return view('product.index');
 });

@@ -2,6 +2,6 @@
 
 @section('content')
 
-<index-component />
+<create-component />
 
 @endsection
