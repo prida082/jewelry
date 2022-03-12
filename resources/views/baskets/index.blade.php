@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col">
             <table class="table">
-                <thead class="table-dark">
+                <thead class="table-success">
                     <tr>
                         <th>product name</th>
                         <th>price</th>
