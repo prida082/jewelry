@@ -37,7 +37,8 @@ Route::get('/create', [HomeController::class, 'create_product'])->name('create')
 //Basket 
 Route::resource('baskets', OrderController::class);
 
-Route::post('/baskets',  'App\Http\Controllers\OrderController@store')->name('Basket');
+Route::post('/baskets',  [OrderController::class, 'store'])->name('Basket');
+// Route::post('/baskets',  'App\Http\Controllers\OrderController@update')->name('Basket');
 
 Route::get('/product', function () {
     return view('product.index');

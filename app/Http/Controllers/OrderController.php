@@ -130,11 +130,12 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        if ($request->value = 'checkout') {
+            $order->where('id',$request->id)->update([
+                'status' => 1
+            ]);
+        }
 
-        $order->update([
-            'status' => 1
-        ]);
 
 
         $totalRaw = 0;
