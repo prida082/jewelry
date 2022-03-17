@@ -29,13 +29,31 @@ Route::get('/product', [ProductController::class, 'index']);
 Route::get('/product/show/{id}', [ProductController::class, 'show']);
 Route::get('/product/search/{name}', [ProductController::class, 'search']);
 
+
+Route::middleware('auth:sanctum')->post('/product/store', [ProductController::class, 'store']);
+Route::middleware('auth:sanctum')->post('/product/update/{id}', [ProductController::class, 'update']);
+Route::middleware('auth:sanctum')->delete('/product/del/{id}', [ProductController::class, 'destroy']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //protect
 
 // Route::group(['middleware'=>['auth:sanctum']],function(){
 //     Route::post('/product/store',[\App\Http\Controllers\ProductController::class,'store']);
 //     Route::post('/product/update',[\App\Http\Controllers\ProductController::class,'update']);
 // });
-Route::middleware('auth:sanctum')->post('/product/store', [ProductController::class, 'store']);
-Route::middleware('auth:sanctum')->post('/product/update/{id}', [ProductController::class, 'update']);
-Route::middleware('auth:sanctum')->delete('/product/del/{id}', [ProductController::class, 'destroy']);
-Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
